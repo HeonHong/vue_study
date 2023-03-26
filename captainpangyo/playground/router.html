@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- new Vue로 연결해 놓은 게 app안에서만 유효하기 때문에 -->
+
+        <div>
+            <router-link to="/login">Login</router-link>
+            <!-- 표현 될때는 anchor 태그로 나온다 -->
+            <a href="">Login</a>
+            <router-link to="/main">Main</router-link>
+        </div>
+        <!-- 페이지 url이 변할 때  뿌려지는 부분-->
+        <router-view></router-view>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- vue cdn이 먼저 ㅈ필요하다다 -->
+    <script src="https://unpkg.com/vue-router@3.5.3/dist/vue-router.js"></script>
+    <script>
+        var LoginComponent ={
+            template:'<div>Login</div>'
+        }
+
+        var MainComponent={
+            template:'<div>Main</div>'
+        }
+
+        var router = new VueRouter({
+             mode: 'history',
+            //인스턴스 방식으로 사용
+            //페이지의 라우팅 정보 
+            //라우팅 정보: url에 따라 어떤 페이지가 나올지에 대한 정보. 배열 형식으로 담긴다.
+            //페이지의 개수만큼 객체가 필요
+            routes :[
+                //로그인 페이지 정보
+                {
+                    //key:value 형태
+                    //페이지의 url 이름
+                    path:'/login',
+                    //해당 url에서 표시될 컴포넌트트
+                    component:LoginComponent,
+                },
+                //메인 페이지 정보
+                {
+                    path:'/main',
+                    component:MainComponent,
+                }
+            ]
+        });
+        new Vue({
+            el:'#app',
+            // 라우터 인식을 못하는 경우는 router가 제대로 연결이 되지 않았기 때문이다.
+            router: router,
+
+        });
+    </script>
+
+</body>
+</html>

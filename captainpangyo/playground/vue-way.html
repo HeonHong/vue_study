@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script>
+        var div = document.querySelector('#app');
+        div.innerHTML = 'hello world.';
+        var viewModel = {};
+
+
+        //라이브러리화
+
+        //즉시 실행함수 (function(){})() 안에 함수를 넣어주면 된다.
+        //다른 애플리케이션 로직에 노출되지 않게 다른 scope에 넣어 유효범위를 바뀌주는 것
+        //관련 문서 : https://developer.mozilla.org/ko/docs/Glossary/IIFE
+        (function () { 
+            function init() {
+
+                //reactivity : 데이터의 변화를 화면에서 감지해서 바꿔주는 것
+                // Object.defineProperty('대상객체', 객체의 속성,{정의할 내용});
+                Object.defineProperty(viewModel, 'str', {
+                    //속성에 접근했을 때의 동작을 정의
+                    get: function () {
+                        // viewModel.str에 접근했을 때의 동작
+                        console.log('접근');
+                    },
+
+                    //속성에 값을 할당했을 때의 동작을 정의
+                    set: function (newValue) {
+                        console.log('할당', newValue);
+                        render(newValue)
+                    }
+                });
+                //객체의 동작을 재정의함.
+
+            }
+
+            //set에서 해주던 역할을 밖으로 빼준 것.
+            function render(value) {
+                div.innerHTML = Value;
+            }
+
+            init();
+
+        })();
+        
+    </script>
+</body>
+</html>
