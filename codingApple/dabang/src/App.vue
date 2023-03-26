@@ -1,7 +1,17 @@
 <template>
 
-
-
+  <div class="black-bg" v-if="isOpen">
+    <div class="white-bg">
+      <Discount></Discount>
+      <h4 >{{oneRoomData[clicked].title}}</h4>
+      <p>{{oneRoomData[clicked].content}}</p>
+      <p>{{ oneRoomData[clicked].price }}</p>
+      <button @click="isOpen=!isOpen">닫기</button>
+    </div>
+  </div>
+  <div :style="{display:1==2?'flex':'none'}">
+    스타일에 그냥 갑자기 궁금해서 적용해 봄
+  </div>
   <!-- html -->
 
     <div class="menu">
@@ -13,36 +23,47 @@
       <a v-for="(a, i) in menus" :key="i"  >{{ a }}</a>
       <!-- <a href="">Products</a>
     <a href="">About</a> -->
+
     </div>
 
   
-  <div>
+  <!-- <div> -->
+    <!-- ./은 webpack 문법이다. -->
+    <!-- <img src="./assets/images/room0.jpg" class="room-img"> -->
     <!-- html 속성도 데이터 바인딩 가능 :속성 ="데이터 이름" -->
-    <h4 :style="color">{{ products[0] }}</h4>
+    <!-- <h4 :style="color" @click="isOpen=!isOpen">{{ products[0] }}</h4> -->
     <!-- 데이터 바인딩 사용 이유 -->
     <!-- 1. 가변적인 데이터 변경이 쉽기 때문에 사용 -->
     <!-- 2. [중요]실시간 자동 렌더링 때문에 사용   -->
-    <p>{{ price1 }} 만원</p>
+    <!-- <p>{{ price1 }} 만원</p> -->
     <!-- 전통방식 <button onclick="">허위매물 신고 버튼</button><span>신고수 : 0</span> -->
    <!--  <button v-on:click="자바스크립트">허위매물 신고 버튼</button><span>신고수 : 0</span> -->
-    <button @click="report++">허위매물 신고 버튼</button><br>
+    <!-- <button @click="report++">허위매물 신고 버튼</button><br>
     <button @mouseover="report++">허위매물 신고 mouseover</button><br>
     <button @click="increase1">허위매물 신고 버튼</button><br>
     <span>신고수 : {{ report[0] }}</span>
   </div>
   <div>
+    <img src="./assets/images/room1.jpg" class="room-img">
     <h4 :style="color">{{ products[1] }}</h4>
     <p>{{ price2 }} 만원</p>
     <button @click="increase2">허위매물 신고 버튼</button><br>
     <span>신고수 : {{ report[1] }}</span>
   </div>
   <div>
-      <h4 :style="color">{{ products[2] }}</h4>
-      <p>{{ price2 }} 만원</p>
-      <button @click="increase3">허위매물 신고 버튼</button><br>
-      <span>신고수 : {{ report[2] }}</span> 
+    <img src="./assets/images/room2.jpg" class="room-img">
+    <h4 :style="color">{{ products[2] }}</h4>
+    <p>{{ price2 }} 만원</p>
+    <button @click="increase3">허위매물 신고 버튼</button><br>
+    <span>신고수 : {{ report[2] }}</span> 
+  </div> -->
+  <Discount></Discount>
+  <div v-for="(item,index) in oneRoomData" :key="index">
+    <!-- 속성 안에 데이터 바인딩하고 싶으면 : 꼭 붙이기 -->
+     <img :src="item.image" class="room-img">
+      <h4 :style="color" @click="isOpen=!isOpen; clicked = index">{{ item.title }}</h4>
+      <p>{{ item.price }} 만원</p>
   </div>
-
 
     <!-- 
 <div v-for="(item, index) in products" :key="item">
@@ -54,7 +75,16 @@
 
 <script>
 // javascript
+// import 예시
+// import apple from 위치
+// import {apple, apple2} from 위치
 
+import data from './data.js';
+import Discount from './components/Discount.vue';
+
+//동적 UI 만드는 법
+//1. UI현재 상태를 데이터로 저장해둠(script에 정보 저장)
+//2. 데이터에 따라 UI가 어떻게 보일지 작성
 export default {
   name: 'App',
   data(){
@@ -66,7 +96,10 @@ export default {
       color: 'color:blue',
       products : ['역삼동원룸', '천호동원룸', '마포구원룸'],
       menus : ['home','shop','about'],
-      report :[0,0,0]
+      report :[0,0,0],
+      isOpen:false,
+      oneRoomData:data,
+      clicked:1
     }
   },
   methods:{
@@ -81,13 +114,38 @@ export default {
     }
   },
   components: {
-    
+    Discount,
   }
 }
 </script>
 
 <style>
 /* css */
+
+body{
+  margin:0;
+}
+div{
+  box-sizing:border-box;
+}
+.black-bg{
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.5);
+  position:fixed;
+  padding:20px;
+}
+.white-bg{
+  width:100%;
+  background:white;
+  border-radius:8px;
+  padding:20px;
+}
+
+.room-img{
+  width:100%;
+  margin-top:40px;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -95,6 +153,8 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+
+
 
 .menu{
   background : darkslateblue;
@@ -105,4 +165,7 @@ export default {
   color : white;
   padding : 10px;
 }
+
+
+
 </style>
