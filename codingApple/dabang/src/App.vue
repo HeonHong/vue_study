@@ -1,21 +1,16 @@
 <template>
 
-  <div class="black-bg" v-if="isOpen">
-    <div class="white-bg">
-      <Discount></Discount>
-      <h4 >{{oneRoomData[clicked].title}}</h4>
-      <p>{{oneRoomData[clicked].content}}</p>
-      <p>{{ oneRoomData[clicked].price }}</p>
-      <button @click="isOpen=!isOpen">닫기</button>
-    </div>
-  </div>
-  <div :style="{display:1==2?'flex':'none'}">
-    스타일에 그냥 갑자기 궁금해서 적용해 봄
-  </div>
-  <!-- html -->
 
-    <div class="menu">
-      <!-- <a v-for="작명 in 반복횟수"  :key="작명">Home</a> -->\
+  <!-- <div :style="{display:1==2?'flex':'none'}">
+    스타일 적용이 그냥 갑자기 궁금해서 적용해 봄
+  </div> -->
+  <!-- html -->
+    <Discount></Discount>
+    <!-- <Discount :name="object1.name" :age="object1.age"></Discount>
+    <Discount v-bind="object1"></Discount> -->
+    <Modal :oneRoomData="oneRoomData" :isOpen="isOpen" :clicked="clicked"></Modal>
+    <div class="menu">      
+      <!-- <a v-for="작명 in 반복횟수"  :key="작명">Home</a> -->
       <!-- key 필수. 반복문 요소들을 컴퓨터가 구분하기 위해서 사용 -->
       <!-- <a v-for="작명 in 3"  :key="">Home</a> -->
    
@@ -23,10 +18,12 @@
       <a v-for="(a, i) in menus" :key="i"  >{{ a }}</a>
       <!-- <a href="">Products</a>
     <a href="">About</a> -->
-
     </div>
 
-  
+    <!--작명='문자형 자료' :작명="숫자형자료"-->
+    <Card v-for="(item,index) in oneRoomData" :item="item" :key="index"></Card>
+    <Card v-for="(item, index) in oneRoomData" :item="oneRoomData[index]" :key="index"></Card>
+
   <!-- <div> -->
     <!-- ./은 webpack 문법이다. -->
     <!-- <img src="./assets/images/room0.jpg" class="room-img"> -->
@@ -57,14 +54,9 @@
     <button @click="increase3">허위매물 신고 버튼</button><br>
     <span>신고수 : {{ report[2] }}</span> 
   </div> -->
-  <Discount></Discount>
-  <div v-for="(item,index) in oneRoomData" :key="index">
-    <!-- 속성 안에 데이터 바인딩하고 싶으면 : 꼭 붙이기 -->
-     <img :src="item.image" class="room-img">
-      <h4 :style="color" @click="isOpen=!isOpen; clicked = index">{{ item.title }}</h4>
-      <p>{{ item.price }} 만원</p>
-  </div>
 
+ 
+ 
     <!-- 
 <div v-for="(item, index) in products" :key="item">
   <div>{{ item }}</div>
@@ -81,6 +73,8 @@
 
 import data from './data.js';
 import Discount from './components/Discount.vue';
+import Modal from './components/Modal.vue';
+import Card from './components/Card.vue';
 
 //동적 UI 만드는 법
 //1. UI현재 상태를 데이터로 저장해둠(script에 정보 저장)
@@ -99,7 +93,8 @@ export default {
       report :[0,0,0],
       isOpen:false,
       oneRoomData:data,
-      clicked:1
+      clicked:1,
+      object1:{name:'kim', age:20}
     }
   },
   methods:{
@@ -115,6 +110,8 @@ export default {
   },
   components: {
     Discount,
+    Modal,
+    Card
   }
 }
 </script>
