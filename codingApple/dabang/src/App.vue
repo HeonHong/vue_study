@@ -8,7 +8,7 @@
     <Discount></Discount>
     <!-- <Discount :name="object1.name" :age="object1.age"></Discount>
     <Discount v-bind="object1"></Discount> -->
-    <Modal :oneRoomData="oneRoomData" :isOpen="isOpen" :clicked="clicked"></Modal>
+    <Modal :oneRoomData="oneRoomData" :isOpen="isOpen" :clicked="clicked" @closeModal="isOpen=!isOpen"></Modal>
     <div class="menu">      
       <!-- <a v-for="작명 in 반복횟수"  :key="작명">Home</a> -->
       <!-- key 필수. 반복문 요소들을 컴퓨터가 구분하기 위해서 사용 -->
@@ -21,8 +21,9 @@
     </div>
 
     <!--작명='문자형 자료' :작명="숫자형자료"-->
-    <Card v-for="(item,index) in oneRoomData" :item="item" :key="index"></Card>
-    <Card v-for="(item, index) in oneRoomData" :item="oneRoomData[index]" :key="index"></Card>
+    <Card v-for="(item,index) in oneRoomData" :item="item" :key="index" @openModal="isOpen=true;this.clicked=index;" ></Card>
+    <!-- '$event' 에 자식이 보낸 데이터가 담겨있다.-->
+    <Card v-for="(item, index) in oneRoomData" :item="oneRoomData[index]" @openModal="isOpen = true; clicked=$event" :key="index"></Card>
 
   <!-- <div> -->
     <!-- ./은 webpack 문법이다. -->
@@ -93,7 +94,7 @@ export default {
       report :[0,0,0],
       isOpen:false,
       oneRoomData:data,
-      clicked:1,
+      clicked:0,
       object1:{name:'kim', age:20}
     }
   },

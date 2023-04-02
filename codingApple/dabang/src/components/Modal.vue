@@ -6,7 +6,7 @@
           <p>{{ oneRoomData[clicked].content }}</p>
           <p>{{ oneRoomData[clicked].price }}</p>
           <!-- props로 받은 데이터는 read-only라서 받아온 데이터를 수정하면 안된다. -->
-          <!-- <button @click="isOpen = !isOpen">닫기</button> -->
+          <button @click="$emit('closeModal')">닫기</button>
           <!-- <button @click="isOpen = !isOpen">닫기</button> -->
         </div>
       </div>
