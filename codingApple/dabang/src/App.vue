@@ -35,7 +35,7 @@
     </div>
 
     <!--작명='문자형 자료' :작명="숫자형자료"-->
-    <Card v-for="(item,index) in oneRoomData" :item="item" :key="index" @openModal="isOpen=true;this.clicked=index;" ></Card>
+    <Card v-for="(item,index) in oneRoomData" :item="item" :key="index" @openModal="isOpen=true; this.clicked=index;" ></Card>
     <!-- '$event' 에 자식이 보낸 데이터가 담겨있다.-->
     <!-- <Card v-for="(item, index) in oneRoomData" :item="oneRoomData[index]" @openModal="isOpen = true; clicked=$event" :key="index"></Card> -->
 

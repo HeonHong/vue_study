@@ -27,8 +27,8 @@
 
           <p v-show="isContract">{{month}} 개월 선택함 : {{ oneRoomData[clicked].price *  month}}</p>
           <p v-show="!isContract">에이 2개월 미만이면 우린 뭘 먹고 삽니까</p>
-          
-          
+          <!-- <p>{{ isContract?`${month} 개월 선택`:"에이 ㄴㄴ" }}</p> -->
+          <!-- {{ isContract?<p></p>:<p></p> }} -->
           
           <!-- props로 받은 데이터는 read-only라서 받아온 데이터를 수정하면 안된다. -->
           <button @click="$emit('closeModal')">닫기</button>
