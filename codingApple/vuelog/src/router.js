@@ -1,4 +1,5 @@
 //import from 뒤가 경로가 아닌 경우는 library를 import해서 쓰는 것이다.
+// import { createRouter, createWebHashHistory } from "vue-router";
 import { createWebHistory, createRouter } from "vue-router";
 import List from './components/List.vue';
 import Head from './components/Head.vue';
@@ -60,6 +61,7 @@ const routes = [
 const router = createRouter({
     //설정 object
   history: createWebHistory(),
+  // history: createWebHashHistory(),
   routes,
 });
 

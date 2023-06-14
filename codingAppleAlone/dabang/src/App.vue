@@ -33,6 +33,7 @@ import oneRoomData from './data.js';
 import OneRoom from './components/OneRoom.vue';
 import Modal from './components/Modal.vue'
 import Discount from './components/Discount.vue'
+import _ from 'lodash';
 
 export default {
   data(){
@@ -43,7 +44,8 @@ export default {
       menus: ['home', 'shop', 'about'],
       //이 부분에 그냥 oneRoomData넣으면 안된다.
       //그럼 위의 oneRoomData랑 공유하는 형식으로 인식된다.
-      oneRoomDataCopy : [...oneRoomData]
+      // oneRoomDataCopy : [...oneRoomData]
+      oneRoomDataCopy : _.cloneDeep(oneRoomData)
     }
   },
   // mounted(){
