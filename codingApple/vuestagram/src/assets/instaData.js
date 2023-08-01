@@ -1,8 +1,8 @@
-export default[
+export default [
   {
     name: "Kim Hyun",
-    userImage: "https://placeimg.com/100/100/arch",
-    postImage: "https://placeimg.com/640/480/arch",
+    userImage: "https://picsum.photos/100?random=3",
+    postImage: "https://picsum.photos/600?random=3",
     likes: 36,
     date: "May 15",
     liked: false,
@@ -11,8 +11,8 @@ export default[
   },
   {
     name: "John Doe",
-    userImage: "https://placeimg.com/200/200/people",
-    postImage: "https://placeimg.com/640/480/people",
+    userImage: "https://picsum.photos/100?random=4",
+    postImage: "https://picsum.photos/600?random=4",
     likes: 20,
     date: "Apr 20",
     liked: false,
@@ -21,8 +21,8 @@ export default[
   },
   {
     name: "Minny",
-    userImage: "https://placeimg.com/100/100/animals",
-    postImage: "https://placeimg.com/640/480/animals",
+    userImage: "https://picsum.photos/100?random=5",
+    postImage: "https://picsum.photos/600?random=5",
     likes: 49,
     date: "Apr 4",
     liked: false,

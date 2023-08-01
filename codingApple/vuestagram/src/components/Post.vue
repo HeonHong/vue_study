@@ -1,35 +1,64 @@
-<template lang="">
-    <div class="post">
+<template>
+  <div class="post">
     <div class="post-header">
-<!--  내가 한 방식
-      <div class="profile">
-        <img :src="item.userImage" alt="profileImage">
-      </div> -->
-      <!-- 이렇게 하면 ()안에만 변수고 나머지는 글자처리 필요
-        <div class="profile" :style="background-image : url()"/>
-      -->
-        <div class="profile" :style="{backgroundImage : `url(${item.userImage})`}"/>
-      <span class="profile-name">{{item.name}}</span>
+      <div class="profile"></div>
+      <span class="profile-name">{{instaPost.name}}</span>
     </div>
-    <div class="post-body">
-      <img :src="item.postImage" alt="postImage">
-    </div>
+    <div :class="instaPost.filter" class="post-body" :style="{backgroundImage : `url(${instaPost.postImage})`}"
+    @click="$store.commit('like')"></div>
     <div class="post-content">
-      <p>{{item.likes}}</p>
-      <p><strong>{{item.name}}</strong> {{item.content}}</p>
-      <p class="date">May 15</p>
+      <p>{{ $store.state.likes }}</p>
+      <p><strong>글쓴이아이디</strong>{{ instaPost.content }}</p>
+      <p class="date">{{ instaPost.date }}</p>
     </div>
-</div> 
+  </div>
 </template>
 <script>
 export default {
     //eslint-disable-next-line
-    name:'Post',
+    name: "Post",
     props:{
-      item:Object,
+        instaPost:Object
     }
-}
+};
 </script>
-<style lang="">
-
+<style>
+.post {
+  width: 100%;
+}
+.profile {
+  /* background-image: url("https://picsum.photos/100?random=0"); */
+  width: 30px;
+  height: 30px;
+  background-size: 100%;
+  border-radius: 50%;
+  float: left;
+}
+.profile-name {
+  display: block;
+  float: left;
+  padding-left: 10px;
+  padding-top: 7px;
+  font-size: 14px;
+}
+.post-header {
+  height: 30px;
+  padding: 10px;
+}
+.post-body {
+  background-image: url("https://picsum.photos/600?random=0");
+  height: 450px;
+  background-position: center;
+  background-size: cover;
+}
+.post-content {
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 14px;
+}
+.date {
+  font-size: 11px;
+  color: grey;
+  margin-top: -8px;
+}
 </style>
