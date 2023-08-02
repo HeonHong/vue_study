@@ -7,19 +7,32 @@
       </ul>
 
       <ul class="header-button-right">
-        <li>Publish</li>
+        <li v-if="step == 1" @click="step++">Next</li>
+        <li v-if="step == 2" @click="publish">Publish</li>
       </ul>
 
       <img class="logo" src="./assets/logo.png" />
     </div>
 
     <!-- body -->
-    <Container></Container>
+    <Container
+      :instaData="instaData"
+      :url="url"
+      :step="step"
+      :selectedFilter="selectedFilter"
+      :content="content"
+      @text="textChange"
+    ></Container>
 
     <!-- footer -->
     <div class="footer">
-      <ul class="footer-button-plus">
-        <input type="file" @change = "upload" id="fileUpload" class="input-file"/>
+      <ul class="footer-button-plus" v-if="step == 0">
+        <input
+          type="file"
+          @change="upload"
+          id="fileUpload"
+          class="input-file"
+        />
         <label for="fileUpload" class="input-plus">+</label>
       </ul>
     </div>
@@ -27,20 +40,44 @@
 </template>
 <script>
 import Container from "./components/Container.vue";
-import store from "@/store";
 
 export default {
   name: "app",
   components: {
     Container,
   },
-  methods:{
-    upload(e){
-      store.commit('setUrl', URL.createObjectURL(e.target.files[0]));
-      store.commit('nextStep');
-      console.log(store.state.step);
+  data() {
+    return {
+      instaData: this.$store.state.instaData,
+      step: 0,
+      url: "",
+      selectedFilter: "",
+      content: "",
+    };
+  },
+  methods: {
+    upload(e) {
+      this.url = URL.createObjectURL(e.target.files[0]);
+      this.step++;
+    },
+    textChange(changedText){
+      // console.log("바뀌냐?");
+      this.content=changedText;
+    },
+    publish(){
+      // console.log("오긴 옴?");
+      let url=this.url
+      let selectedFilter=this.selectedFilter
+      let content=this.content
+      this.$store.commit('publish',{url,selectedFilter,content})
+      this.step=0;
     }
-  }
+  },
+  mounted() {
+    this.emitter.on("selectedFilter", (filter) => {
+      this.selectedFilter = filter;
+    });
+  },
 };
 </script>
 <style>
@@ -92,7 +129,7 @@ ul {
   width: 50px;
   cursor: pointer;
   margin-top: 10px;
-  padding-right: 20px;
+  text-align: right;
 }
 
 .footer {

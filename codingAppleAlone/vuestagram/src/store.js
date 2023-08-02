@@ -5,18 +5,36 @@ const store = createStore({
   state() {
     return {
       instaData: instaData,
-      step: 0,
-      url:'',
+      num: 4,
     };
   },
   mutations: {
-    nextStep(state) {
-      state.step++;
+    publish(state, payload) {
+      let newData = {
+        name: "Honey",
+        userImage: "https://picsum.photos/100?random=5",
+        postImage: payload.url,
+        likes: 0,
+        date: "Apr 4",
+        liked: false,
+        content: payload.content,
+        filter: payload.selectedFilter,
+        num: state.num++,
+      };
+
+      state.instaData.unshift(newData);
     },
-    setUrl(state, payload){
-        // console.log(payload);
-        state.url=payload
-    }
+    like(state, payload) {
+      let index = state.instaData.findIndex((item) => item.num === payload);
+      
+      if (!state.instaData[index].liked) {
+        state.instaData[index].likes++;
+        state.instaData[index].liked=true;
+      } else {
+        state.instaData[index].likes--;
+        state.instaData[index].liked=false;
+      }
+    },
   },
   actions: {},
 });

@@ -6,10 +6,13 @@
         :style="{ backgroundImage: `url(${insta.userImage})` }"
       ></div>
       <span class="profile-name">{{ insta.name }}</span>
+      <span>글번호{{ insta.num }}</span>
     </div>
     <div
+      :class="insta.filter"
       class="post-body"
       :style="{ backgroundImage: `url(${insta.postImage})` }"
+      @dblclick="like"
     ></div>
 
     <div class="post-content">
@@ -26,6 +29,12 @@ export default {
   props: {
     insta: Object,
   },
+  methods:{
+    like(){
+      let num=this.insta.num
+      this.$store.commit('like',num)
+    }
+  }
 };
 </script>
 <style>
