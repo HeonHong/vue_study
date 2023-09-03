@@ -80,6 +80,7 @@ export default {
   components: {
     Container,
   },
+  //부모 컴포넌트
   mounted() {
     this.emitter.on("dataToApp", (filter) => {
       this.filter = filter;
