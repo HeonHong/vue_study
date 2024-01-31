@@ -2,7 +2,7 @@
     <!-- <div class="star" ref="star" :style="{ fontSize: `${size}px`, animationDelay:`${delay}s` }"> -->
     <div class="star" ref="star" :style="{ fontSize: `${size}px`, opacity: `${opacity}`, top:`${top}px`, left:`${left}px`}">
     ★
-    </div>
+    </div> 
 </template>
 <script>
 export default {

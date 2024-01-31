@@ -2,7 +2,7 @@
     <div>
 
         <div class="card-container" ref="cardDiv" @mousemove="tilt" @mouseleave="setBack" >
-            <img class="card-image"/>
+            <img class="card-image"/> 
         </div>
         <!-- <div class="card-container" ref="cardDiv2" @mousemove="tilt2" >
             <img class="card-image"/>

@@ -1,7 +1,7 @@
 <template lang="">
   <div>
     <StarBackground v-for="n in iterateNum" :key="n"></StarBackground>
-    <CardForm></CardForm>
+    <CardForm></CardForm> 
   </div>
 </template>
 <script>
